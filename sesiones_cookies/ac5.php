@@ -2,7 +2,14 @@
 página debe tener únicamente algo de texto y un formulario para cambiar el color.-->
 
 <?php
-  
+    // Inicializa la variable $backgroundColor con un valor predeterminado.
+    $backgroundColor = "#f8f9fa";
+
+    // Si existe una cookie de color de fondo, úsala.
+    if (isset($_COOKIE['backgroundColor'])) {
+        $backgroundColor = $_COOKIE['backgroundColor'];
+    }
+
   if (isset($_POST['color'])) {
       $selectedColor = $_POST['color'];
       switch ($selectedColor) {
@@ -15,8 +22,12 @@ página debe tener únicamente algo de texto y un formulario para cambiar el col
           case 'azul':
               $backgroundColor = "#017bfc";
               break;
+            case 'amarillo':
+                $backgroundColor= "#fff403";
+                break;
           default:
-              $backgroundColor = "#f8f9fa"; 
+              $backgroundColor = "#f8f9fa";
+            break; 
       }
   
      
@@ -54,11 +65,12 @@ página debe tener únicamente algo de texto y un formulario para cambiar el col
     <div class="form-container text-center">
         <h1 class="mb-4">Elige un color</h1>
         <form action="ac5.php" method="post">
-            <select class="form-select mb-3" aria-label="Selecciona un color">
+            <select class="form-select mb-3" name="color" aria-label="Selecciona un color">
                 <option selected disabled>Selecciona un color</option>
-                <option name="color" value="rojo">Rojo</option>
-                <option name="color" value="azul">Azul</option>
-                <option name="color" value="verde">Verde</option>
+                <option value="rojo">Rojo</option>
+                <option value="azul">Azul</option>
+                <option value="verde">Verde</option>
+                <option value="amarillo">Amarillo</option>
             </select>
             <button type="submit" class="btn btn-primary">Guardar Color</button>
         </form>
