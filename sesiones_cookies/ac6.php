@@ -4,15 +4,22 @@ mostrar cuántas respuestas son válidas y cuántas erróneas.
 La aplicación debe tener una opción para introducir los pares de palabras (inglés - español) que se deben guardar en
 cookies; de esta forma, si de vez en cuando se dan de alta nuevas palabras, la aplicación puede llegar a contar con un
 número considerable de entradas en el mini-diccionario.-->
-
 <?php
 session_start();
-if (!isset($_COOKIE['biblioteca'])) {
-    setcookie('biblioteca', serialize([]), time() + 3 * 24 * 3600);
-}
-$diccionario = isset($_COOKIE['biblioteca']);
 
-$_SESSION['palabra_actual'] = array_rand($diccionario); 
+// Inicializar o recuperar el diccionario desde las cookies
+if (!isset($_COOKIE['biblioteca'])) {
+    $biblioteca = [];
+    setcookie('biblioteca', serialize($biblioteca), time() + 3 * 24 * 3600);
+} else {
+    $biblioteca = unserialize($_COOKIE['biblioteca']);
+}
+
+// Seleccionar palabra aleatoria si el diccionario no está vacío
+$palabraRandom = null;
+if (!empty($biblioteca)) {
+    $palabraRandom = array_rand($biblioteca);
+}
 
 if (isset($_POST['boton'])) {
     switch ($_POST['boton']) {
@@ -22,19 +29,37 @@ if (isset($_POST['boton'])) {
             if ($palabraIngles && $palabraEspanol) {
                 $biblioteca[$palabraIngles] = $palabraEspanol;
                 setcookie('biblioteca', serialize($biblioteca), time() + 3 * 24 * 3600);
-                echo "Palabra añadida correctamente.";
+                $mensaje = "Palabra añadida correctamente.";
             } else {
-                echo "Por favor, completa ambos campos.";
+                $mensaje = "Por favor, completa ambos campos.";
             }
             break;
-            case 'comprobar': 
-               
-                break;
-            default:
-                $mensaje = "Acción no reconocida.";
-                break;
-        }
+
+        case 'comprobar':
+            $respuesta = $_POST['respuesta'] ?? '';
+            if ($palabraRandom && $respuesta) {
+                $significadoCorrecto = $biblioteca[$palabraRandom];
+                if ($palabraRandom && $respuesta) {
+                // Compara la respuesta del usuario con la traducción correcta (sin importar mayúsculas/minúsculas).
+                    if (strtolower($respuesta) == strtolower($biblioteca[$palabraRandom])) {
+                        $mensaje = "¡Correcto! La traducción de '$palabraRandom' es '$respuesta'.";
+                    } else {
+                        $mensaje = "Incorrecto. La traducción de '$palabraRandom' es '" . $biblioteca[$palabraRandom] . "'.";
+                    }
+                } else {
+                    $mensaje = "No hay palabras en el diccionario o no ingresaste una respuesta.";
+                }
+                
+            } else {
+                $mensaje = "No hay palabras en el diccionario o no ingresaste una respuesta.";
+            }
+            break;
+
+        default:
+            $mensaje = "Acción no reconocida.";
+            break;
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +91,11 @@ if (isset($_POST['boton'])) {
     <div class="form-container text-center">
         <h1 class="mb-4">Diccionario de Inglés-Español</h1>
         
+        <?php if (isset($mensaje)): ?>
+            <div class="alert alert-info"><?= $mensaje ?></div>
+        <?php endif; ?>
+        
+        <!-- Formulario para introducir palabras -->
         <form action="ac6.php" method="post">
             <h2 class="mb-3">Añadir Palabras al Diccionario</h2>
             <div class="mb-3">
@@ -77,12 +107,18 @@ if (isset($_POST['boton'])) {
             <button type="submit" class="btn btn-primary mb-4" name="boton" value="intro">Introducir</button>
         </form>
         
+        <!-- Formulario para comprobar traducción -->
         <form action="ac6.php" method="post">
             <h2 class="mb-3">Buscar Significado</h2>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="accion" name="accion" placeholder="Palabra en Ingles :" <?=$_COOKIE[$random]?> required>
-            </div>
-            <button type="submit" class="btn btn-primary" name="boton" value="comprobar">Comprobar</button>
+            <?php if ($palabraRandom): ?>
+                <p class="mb-3">Traduce esta palabra: <strong><?= htmlspecialchars($palabraRandom) ?></strong></p>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="respuesta" name="respuesta" placeholder="Escribe la traducción en español" required>
+                </div>
+                <button type="submit" class="btn btn-primary" name="boton" value="comprobar">Comprobar</button>
+            <?php else: ?>
+                <p>No hay palabras en el diccionario para comprobar.</p>
+            <?php endif; ?>
         </form>
     </div>
 </body>
