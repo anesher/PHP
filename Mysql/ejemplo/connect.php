@@ -34,3 +34,4 @@ if ($listCountry != null) {
 
 // Cerramos la conexion
 mysqli_close($mysqli);
+ 
