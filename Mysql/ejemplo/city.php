@@ -9,7 +9,7 @@ if (mysqli_connect_errno()) {
 $listCity=mysqli_query($mysqli,"SELECT `Name`,`CountryCode`,`District`, `Population` FROM `city` ORDER BY Name ASC");
 
 if($listCity !=null){
-    if(!isset($_POST['city'])){
+    if(isset($_POST['city'])){
         foreach($listCity as $objCountry){
             if($_POST['city']===$objCountry[`CountryCode`]){
                 echo "$objCountry[Name],$objCountry[District], $objeCountry[Population]";
@@ -40,7 +40,7 @@ if($listCity !=null){
                 <h5 class="card-title text-center mb-4 text-secondary">Formulario de Números</h5>
                 <form action="city.php" method="post">
                     <div class="mb-3">
-                        <label for="accion" class="form-label">Introduce un número positivo:</label>
+                        <label for="accion" class="form-label">Introduce el indice del pais:</label>
                         <input type="text" class="form-control" id="city" name="city" placeholder="Escribe un número" required>
                     </div>
                     <div class="text-center">
