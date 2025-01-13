@@ -4,9 +4,9 @@
         // Control
         echo "Fallo al conectar a MySQL: " . mysqli_connect_error();
     }
-
+   
     $listCity= mysqli_query($mysqli,"SELECT `Continent` FROM `country` ORDER BY Name ASC");
-    $listCity=mysqli_query($mysqli,"INSERT INTO city VALUES (NULL, 'PRUEBA', 'AFG', 'kabul', 0)");
+    
     if($listCity!=null){
         foreach($listCity as $objCountry){
             echo "$objCountry[Continent]<br>";
