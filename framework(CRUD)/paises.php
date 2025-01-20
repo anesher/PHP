@@ -18,15 +18,20 @@ include_once ("connectbbdd.php");
 
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nomhre</th>
-      <th scope="col">Codigo del Pais</th>
-      <th scope="col">Distrito</th>
-      <th scope="col">Poblacion</th>
+        <th scope="col">Code</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Continete</th>
+        <th scope="col">Region</th>
+        <th scope="col">Area</th>
+        <th scope="col">Año de Independencia</th>
+        <th scope="col">Poblacion</th>
+        <th scope="col">Esperanza de vida</th>
+        <th scope="col">GNP</th>
+        </tr>
     </tr>
   </thead>
   <tbody>
-    <?php buscarCiudades()?>
+    <?php buscarPaises()?>
 </table>
 </body>
 </html>
