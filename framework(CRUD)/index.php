@@ -1,28 +1,16 @@
 <?php
-
-$mysqli = mysqli_connect('localhost', 'localhost', '123456', 'world', 3306);
-if (mysqli_connect_errno()) {
-    // Control
-    echo "Fallo al conectar a MySQL: " . mysqli_connect_error();
-}
-if(isset($_POST['username'])&&isset($_POST['password'])){
-    $user = $_POST['username'];
-    $contraseya = $_POST['password'];
-
-$listUser = mysqli_query($mysqli, "SELECT `Passwordhash` FROM `user` WHERE `Username` = '$user'");
-
-  if ($listUser) {
-      $objUser = mysqli_fetch_assoc($listUser);
-      if ($objUser && password_verify($contraseya, $objUser['Passwordhash'])) {
-          echo "Sesion iniciada";
-      } else {
-          echo "Sesion no iniciada";
-      }
-  } else {
-      echo "Error en la consulta";
-  }
-}
-$mysqli->close();
+  include_once ("connectbbdd.php");
+ 
+  if(isset($_POST['user'])&&(isset($_POST['password']))){
+       $usuario = $_POST['user'];
+       $contraseya = $_POST['password'];
+       
+        $consulta = "SELECT `Username`,`Passwordhash` FROM `user` WHERE `Username`='$usuario' AND `Passwordhash`='$contraseya'";
+        
+        login($usuario,$contraseya,$extraido,$consulta);
+ 
+    }
+  
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +36,7 @@ $mysqli->close();
       <h1 class="h3 mb-3 fw-normal">Inicar Sesion</h1>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario">
+        <input type="text" class="form-control" id="user" name="user" placeholder="Nombre de Usuario">
         <label for="floatingInput">Usuario</label>
       </div>
       <div class="form-floating">
