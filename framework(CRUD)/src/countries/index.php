@@ -1,5 +1,5 @@
 <?php
-include_once ("connectbbdd.php");
+include_once ("../function/connectbbdd.php");
 
 ?>
 
@@ -8,7 +8,7 @@ include_once ("connectbbdd.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
     <title>CRUD</title>
 </head>
 
@@ -27,6 +27,9 @@ include_once ("connectbbdd.php");
         <th scope="col">Poblacion</th>
         <th scope="col">Esperanza de vida</th>
         <th scope="col">GNP</th>
+        <th scope="col">GNPOld</th>
+        <th scope="col">Nombre Local</th>
+        <th scope="col">Acciones</th>
         </tr>
     </tr>
   </thead>

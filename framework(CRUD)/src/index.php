@@ -1,5 +1,5 @@
 <?php
-  include_once ("connectbbdd.php");
+  include_once ("./function/connectbbdd.php");
  
   if(isset($_POST['user'])&&(isset($_POST['password']))){
        $usuario = $_POST['user'];
@@ -7,7 +7,7 @@
        
         $consulta = "SELECT `Username`,`Passwordhash` FROM `user` WHERE `Username`='$usuario' AND `Passwordhash`='$contraseya'";
         
-        login($usuario,$contraseya,$extraido,$consulta);
+        login($usuario,$contraseya,$consulta);
  
     }
   
@@ -23,7 +23,7 @@
         <title>Framework</title>
 
    
-    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet" type="text/css">
 
   </head>
@@ -32,7 +32,7 @@
      
   <main class="form-signin m-auto">
     <form method="post" action="index.php">
-      <img class="mb-4" src="img/cordoba.jpg" alt="" width="72" height="57">
+      <img class="mb-4" src="../img/cordoba.jpg" alt="" width="72" height="57">
       <h1 class="h3 mb-3 fw-normal">Inicar Sesion</h1>
 
       <div class="form-floating">
@@ -54,7 +54,7 @@
     <p class="mt-5 mb-3 text-body-secondary">© Antonio Eslava </p>
   </form>
 </main>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
-</html>
+</html> 

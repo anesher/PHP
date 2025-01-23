@@ -24,7 +24,7 @@
 </head>
 <body>
     <h1>Índice</h1>
-    <button class="btn btn-ciudades" onclick="location.href='ciudades.php'">Ciudades</button>
-    <button class="btn btn-paises" onclick="location.href='paises.php'">Países</button>
+    <button class="btn btn-ciudades" onclick="location.href='./cities/index.php'">Ciudades</button>
+    <button class="btn btn-paises" onclick="location.href='./countries/index.php'">Países</button>
 </body>
 </html>
