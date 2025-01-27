@@ -17,8 +17,7 @@
         if($res!=null){
             mysqli_data_seek($res, 0); 
             $extraido = mysqli_fetch_array($res);
-        }
-            
+        }    
         if (isset($extraido) && $extraido['Username'] == $usuario && $extraido['Passwordhash'] == $contraseya){
             header("Location: main.php");
             exit;
@@ -28,7 +27,7 @@
     }
 
 
-    function buscarCiudades(){
+    function listarCiudades(){
         
         $mysqli = connect_bbdd();
 
@@ -41,7 +40,7 @@
                 echo "<td>" . $extraido['CountryCode'] . "</td>";
                 echo "<td>" . $extraido['District'] . "</td>";
                 echo "<td>" . $extraido['Population'] . "</td>";
-                echo "<td><button type='button' class='btn btn-danger'>Delete</button> ";
+                echo "<td><button  type='button' class='btn btn-danger'>Delete</button> ";
                 echo "<button type='button' class='btn btn-warning'>Modificar</button></td>";
                 echo "</tr>";  
             }
@@ -49,7 +48,7 @@
         }
     }
 
-    function buscarPaises(){
+    function listarPaises(){
         $mysqli = connect_bbdd();
         $res = mysqli_query($mysqli, "SELECT * FROM country");
         if($res!=null){
@@ -66,12 +65,12 @@
                 echo "<td>" . $extraido['GNP'] . "</td>";
                 echo "<td>" . $extraido['GNPOld'] . "</td>";
                 echo "<td>" . $extraido['LocalName'] . "</td>";
-                echo "<td><button type='button' class='btn btn-danger'>Delete</button>";
-                echo "<td><button type='button' class='btn btn-warning'>Modificar</button></td>";
+                echo "<td><button  type='button' class='btn btn-danger'>Delete</button> ";
+                echo "<button type='button' class='btn btn-warning'>Modificar</button></td>";
                 echo "</tr>";
 
             } 
         }
     }
-
+//href="destino.php?saludo=hola
 ?>

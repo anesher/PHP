@@ -1,6 +1,8 @@
 <?php
 include_once ("../function/connectbbdd.php");
+include_once("../function/functionCRUD.php");
 
+  
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +36,7 @@ include_once ("../function/connectbbdd.php");
     </tr>
   </thead>
   <tbody>
-    <?php buscarPaises()?>
+    <?php listarPaises()?>
 </table>
 </body>
 </html>

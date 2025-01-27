@@ -1,15 +1,12 @@
 <?php
 include_once ("connectbbdd.php");
 
-function delete(){
+function eliminarPais($id,$tabla){
     $mysqli = connect_bbdd();
-    $id = $_POST['id'];
-    $res = mysqli_query($mysqli, "DELETE FROM city WHERE ID = $id");
-    if($res!=null){
-        echo "Ciudad eliminada";
-    }else{
-        echo "Error al eliminar la ciudad";
-    }
+    $stmt = $mysqli->prepare("DELETE FROM $tabla WHERE Code = ?");
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $stmt->close();
+    $mysqli->close();
 }
 
-?>

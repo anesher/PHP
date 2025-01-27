@@ -13,23 +13,29 @@ include_once ("../function/connectbbdd.php");
 </head>
 
 <body>
-<form method="post" action="main.php">
-<table class="table">
-
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Codigo del Pais</th>
-      <th scope="col">Distrito</th>
-      <th scope="col">Poblacion</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php buscarCiudades()?>
-    </tbody>
-</table>
-</form>
+<div class="container mt-3">
+    <div class="d-flex justify-content-start mb-3">
+        <button type="button" class="btn btn-primary me-2">Buscar</button>
+        <button type="button" class="btn btn-success">Crear</button>
+    </div>
+    <form method="post" action="main.php">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Codigo del Pais</th>
+                    <th scope="col">Distrito</th>
+                    <th scope="col">Poblacion</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php listarCiudades()?>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
