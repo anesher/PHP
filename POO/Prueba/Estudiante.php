@@ -8,10 +8,39 @@ no, se reprueba).
         private int $edad;
         private float $notaFinal;
 
-        public function __construct(string $nombre, int $edad, float $notaFinal){
+        public function __construct(string $nombre, float $notaFinal){
             $this->nombre = $nombre;
-            $this->edad = $edad;
             $this->notaFinal = $notaFinal;
             }
+        
+        function getNombre(){
+            return $this->nombre;
+        }
+        function getNotaFinal(){
+            return $this->notaFinal;
+        }
+
+        function setNombre($nombre){
+            $this->nombre=$nombre;
+        }
+
+        function setNotafinal($nota){
+            $this->notaFinal=$nota;
+        }
+
+        function aprobar(){
+            if ($this->notaFinal >= 6) {
+                return "El estudiante $this->nombre ha aprobado con una nota final de $
+                $this->notaFinal.";
+            } else {
+                return "El estudiante $this->nombre ha reprobado con una nota final de $
+                $this->notaFinal.";
+            }
+        }
     }
+    $estudiante1=new Estudiante("Juan", 7);
+    $estudiante2=new Estudiante("Carmen",4);
+
+    echo $estudiante1->aprobar();
+    echo $estudiante2->aprobar();
 ?>
